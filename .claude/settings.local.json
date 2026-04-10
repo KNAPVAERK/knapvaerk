@@ -25,7 +25,13 @@
       "Bash(git restore:*)",
       "Bash(mkdir:*)",
       "Bash(if exist .next rmdir /s /q .next)",
-      "Bash(netstat:*)"
+      "Bash(netstat:*)",
+      "Bash(git init:*)",
+      "Bash(vercel:*)",
+      "Bash(timeout 3 tail:*)"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\45239\\Desktop\\Knapværk\\sales-tracker\\src\\lib"
     ]
   }
 }

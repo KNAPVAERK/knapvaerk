@@ -54,5 +54,24 @@
   "languageSwitcher": {
     "switchToEnglish": "Switch to English",
     "switchToDanish": "Switch to Danish"
+  },
+  "retailer": {
+    "hero_title": "KNAPVÆRK FOR RETAILERS",
+    "hero_subtitle": "Handcut buttons for select yarn shops",
+    "hero_img_alt": "Handcut wooden buttons on finished knitwear",
+    "intro_text": "KNAPVÆRK makes buttons in solid wood. Each button is cut, shaped and finished by hand in our workshop on Hindsholm.",
+    "sortiment_img_alt": "Two toggle types in ebony, flamed maple, oak and walnut",
+    "sortiment_text": "The range consists of two toggle types — with one hole and with two holes — in four wood species: ebony, flamed maple, oak and walnut. The surface finish is either hand-polished shellac or linseed oil.",
+    "wholesale_only": "All buttons are produced exclusively for retailers. We do not sell to private customers.",
+    "why_title": "Why KNAPVÆRK",
+    "why_text1": "No minimum order. Lead time from a few days to one week. Recommended retail price 100 DKK per piece.",
+    "why_text2": "Everything is cut by hand, making custom shapes possible — even in very small runs. If your shop has an idea, we will find a solution.",
+    "why_text3": "Payment is by invoice, net 14 days. For select shops we offer consignment.",
+    "haandvaerk_img_alt": "Hands cutting a wooden button in the workshop",
+    "cta_title": "Try KNAPVÆRK in your shop",
+    "proevepakke_img_alt": "Open cardboard box with 18 handcut wooden buttons",
+    "cta_text1": "We will send you a sample pack with 18 buttons — free of charge and without obligation. The pack contains both toggle types in all four wood species, with both surface finishes. All delivered in a KNAPVÆRK cardboard box.",
+    "cta_text2": "Write to us at <emailLink>info@knapvaerk.com</emailLink> and we'll send the sample.",
+    "page_label": "FOR RETAILERS"
   }
 }

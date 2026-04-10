@@ -478,3 +478,7 @@ button:disabled {
     scroll-behavior: auto !important;
   }
 }
+/* Hide BackToTop on retailer page */
+body:has([data-page="retailer"]) [class*="backToTop"] {
+  display: none !important;
+}
