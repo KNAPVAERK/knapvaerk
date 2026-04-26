@@ -142,8 +142,6 @@
 .image {
   width: 100%;
   height: auto;
-  aspect-ratio: 3 / 4;
-  object-fit: cover;
   display: block;
   transition: transform var(--duration-normal) var(--easing-luxury);
   cursor: zoom-in;

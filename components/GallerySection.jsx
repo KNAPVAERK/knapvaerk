@@ -196,7 +196,7 @@ export default function GallerySection({
                   src={urlFor(image).width(1000).auto('format').url()}
                   alt={image.alt || `${title} billede ${index + 1}`}
                   width={1000}
-                  height={1333}
+                  height={1000}
                   loading="lazy"
                   quality={90}
                   sizes="(max-width: 768px) 100vw, 50vw"
