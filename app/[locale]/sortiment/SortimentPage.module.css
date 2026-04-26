@@ -1,0 +1,272 @@
+.page {
+  background: var(--bg);
+  color: var(--text-primary);
+  flex: 1;
+}
+
+/* ── Header / Logo ── */
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-lg) var(--space-sm) var(--space-md);
+  text-align: center;
+}
+
+.logoLink {
+  display: block;
+  text-decoration: none;
+  margin-bottom: var(--space-sm);
+}
+
+.logo {
+  width: 480px;
+  max-width: 90vw;
+  height: auto;
+  display: block;
+}
+
+.pageLabel {
+  font-family: var(--font-ui);
+  font-size: var(--text-xl);
+  font-weight: 300;
+  letter-spacing: var(--tracking-ui);
+  line-height: var(--line-height-heading);
+  color: var(--text-primary);
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.subline {
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  font-weight: 400;
+  letter-spacing: var(--tracking-ui);
+  line-height: var(--line-height-ui);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* ── Sections ── */
+
+.gridSection {
+  padding: var(--space-md) var(--space-sm);
+  max-width: 980px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.termsSection {
+  padding: var(--space-md) var(--space-sm);
+}
+
+.contactSection {
+  padding: var(--space-sm) var(--space-sm) var(--space-md);
+  max-width: 680px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.sectionTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 400;
+  letter-spacing: var(--tracking-serif);
+  line-height: var(--line-height-heading);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-sm) 0;
+}
+
+.body {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 400;
+  line-height: var(--line-height-body);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-sm) 0;
+}
+
+/* ── Product Groups ── */
+
+.group {
+  margin-bottom: var(--space-md);
+}
+
+.group:last-of-type {
+  margin-bottom: 0;
+}
+
+.groupGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-sm);
+}
+
+@media (max-width: 599px) {
+  .groupGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Product Card ── */
+
+.card {
+  border: 1px solid var(--border-light);
+  background: var(--bg-elevated);
+  transition:
+    box-shadow var(--duration-fast) var(--easing-smooth),
+    border-color var(--duration-fast) var(--easing-smooth);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-sm);
+  border-color: var(--border-medium);
+}
+
+.cardImageWrap {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--bg-subtle);
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+  cursor: default;
+}
+
+.cardBody {
+  padding: var(--space-xs);
+}
+
+.cardMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-xs);
+}
+
+.cardTraesort {
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: var(--tracking-ui);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin: 0 0 0.35rem 0;
+  max-width: none;
+  line-height: var(--line-height-ui);
+}
+
+.cardForm {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: 400;
+  color: var(--text-primary);
+  margin: 0 0 0.15rem 0;
+  max-width: none;
+  line-height: var(--line-height-ui);
+}
+
+.cardOverflade {
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  margin: 0;
+  max-width: none;
+  line-height: var(--line-height-ui);
+}
+
+.cardPrice {
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  font-weight: 400;
+  color: var(--text-secondary);
+  margin: 0;
+  max-width: none;
+  line-height: var(--line-height-ui);
+  white-space: nowrap;
+  padding-top: 0.1rem;
+}
+
+
+.footnote {
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  font-weight: 400;
+  letter-spacing: var(--tracking-ui);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  margin: 0;
+  line-height: var(--line-height-ui);
+  max-width: none;
+}
+
+/* ── Handelsbetingelser ── */
+
+.termsList {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: var(--space-sm);
+  row-gap: var(--space-xs);
+  margin: 0;
+  padding: 0;
+}
+
+.termItem {
+  display: contents;
+}
+
+.termLabel {
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: var(--tracking-ui);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  line-height: var(--line-height-body);
+}
+
+.termValue {
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-weight: 400;
+  color: var(--text-primary);
+  line-height: var(--line-height-body);
+  margin: 0;
+  max-width: none;
+}
+
+/* ── Email link ── */
+
+.emailLink {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* ── Desktop ── */
+
+@media (min-width: 969px) {
+  .gridSection {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .termsSection {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .contactSection {
+    padding: var(--space-sm) var(--space-md) var(--space-lg);
+  }
+}

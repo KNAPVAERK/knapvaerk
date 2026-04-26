@@ -64,7 +64,7 @@
     "sortiment_text": "Sortimentet består af to toggletyper — med ét hul og med to huller — i fire træsorter: ibenholt, flammet ahorn, eg og valnød. Overfladebehandlingen er enten håndpoleret shellak eller linolie.",
     "wholesale_only": "Alle knapper produceres udelukkende til forhandlere. Vi sælger ikke til private.",
     "why_title": "Hvorfor KNAPVÆRK",
-    "why_text1": "Ingen minimumskøb. Leveringstid fra få dage til en uge. Vejledende udsalgspris 100 kr. pr. stk.",
+    "why_text1": "Ingen minimumskøb. Leveringstid fra få dage til flere uger afhængigt af ordrestørrelse. B2B-pris 50 kr. Vejledende udsalgspris 100 kr. pr. stk.",
     "why_text2": "Alt snittes i hånden, hvilket gør custom former mulige — også i meget små oplag. Har din butik en idé, finder vi en løsning.",
     "why_text3": "Betaling er faktura, 14 dage netto. For udvalgte butikker tilbyder vi konsignment, ligesom der er mulighed for butiksdisplay i visse tilfælde.",
     "haandvaerk_img_alt": "Hænder der snitter en træknap i værkstedet",
@@ -73,5 +73,9 @@
     "cta_text1": "Vi sender dig en prøvepakke med 18 knapper — uden beregning og uden forpligtelse. Pakken indeholder begge toggletyper i alle fire træsorter med begge overfladebehandlinger. Alt leveret i en KNAPVÆRK-kartonæske.",
     "cta_text2": "Skriv til os på <emailLink>info@knapvaerk.com</emailLink>, så sender vi vareprøven.",
     "page_label": "FOR FORHANDLERE"
+  },
+  "sortiment": {
+    "page_label": "SORTIMENT",
+    "subline": "Forhandlerkatalog · Priser er ekskl. moms"
   }
 }

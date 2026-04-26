@@ -73,5 +73,9 @@
     "cta_text1": "We will send you a sample pack with 18 buttons — free of charge and without obligation. The pack contains both toggle types in all four wood species, with both surface finishes. All delivered in a KNAPVÆRK cardboard box.",
     "cta_text2": "Write to us at <emailLink>info@knapvaerk.com</emailLink> and we'll send the sample.",
     "page_label": "FOR RETAILERS"
+  },
+  "sortiment": {
+    "page_label": "TRADE CATALOGUE",
+    "subline": "Wholesale catalogue · Prices excl. VAT"
   }
 }
