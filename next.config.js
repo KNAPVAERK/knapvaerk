@@ -16,6 +16,13 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+
+  async redirects() {
+    return [
+      { source: '/sortiment', destination: '/retailer', permanent: true },
+      { source: '/en/sortiment', destination: '/en/retailer', permanent: true },
+    ]
+  },
 }
 
 module.exports = withNextIntl(nextConfig)

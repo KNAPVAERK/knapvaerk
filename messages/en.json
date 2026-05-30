@@ -56,26 +56,68 @@
     "switchToDanish": "Switch to Danish"
   },
   "retailer": {
-    "hero_title": "KNAPVÆRK FOR RETAILERS",
-    "hero_subtitle": "Handcut buttons for select yarn shops",
-    "hero_img_alt": "Handcut wooden buttons on finished knitwear",
-    "intro_text": "KNAPVÆRK makes buttons in solid wood. Each button is cut, shaped and finished by hand in our workshop on Hindsholm.",
-    "sortiment_img_alt": "Two toggle types in ebony, flamed maple, oak and walnut",
-    "sortiment_text": "The range consists of two toggle types — with one hole and with two holes — in four wood species: ebony, flamed maple, oak and walnut. The surface finish is either hand-polished shellac or linseed oil.",
-    "wholesale_only": "All buttons are produced exclusively for retailers. We do not sell to private customers.",
-    "why_title": "Why KNAPVÆRK",
-    "why_text1": "No minimum order. Lead time from a few days to one week. Recommended retail price 100 DKK per piece.",
-    "why_text2": "Everything is cut by hand, making custom shapes possible — even in very small runs. If your shop has an idea, we will find a solution.",
-    "why_text3": "Payment is by invoice, net 14 days. For select shops we offer consignment.",
-    "haandvaerk_img_alt": "Hands cutting a wooden button in the workshop",
-    "cta_title": "Try KNAPVÆRK in your shop",
-    "proevepakke_img_alt": "Open cardboard box with 18 handcut wooden buttons",
-    "cta_text1": "We will send you a sample pack with 18 buttons — free of charge and without obligation. The pack contains both toggle types in all four wood species, with both surface finishes. All delivered in a KNAPVÆRK cardboard box.",
-    "cta_text2": "Write to us at <emailLink>info@knapvaerk.com</emailLink> and we'll send the sample.",
-    "page_label": "FOR RETAILERS"
-  },
-  "sortiment": {
     "page_label": "TRADE CATALOGUE",
-    "subline": "Wholesale catalogue · Prices excl. VAT"
+    "intro_text": "Each button is cut, shaped and finished by hand in the workshop on Hindsholm.",
+    "forms_title": "Forms",
+    "form_romso_name": "Romsø",
+    "form_romso_desc": "The Romsø button is carved with a gentle taper at each end.",
+    "form_stavre_name": "Stavre",
+    "form_stavre_desc": "Soft forms meet a clearly defined edge that frames the button along its length.",
+    "collection_title": "The collection",
+    "image_placeholder": "Photo coming",
+    "terms_title": "Prices and terms",
+    "term_price_label": "Purchase price",
+    "term_price_value": "50 DKK per piece, excl. VAT",
+    "term_retail_label": "Suggested retail",
+    "term_retail_value": "100 DKK per piece (~50% margin)",
+    "term_minimum_label": "Minimum order",
+    "term_minimum_value": "No minimum order",
+    "term_payment_label": "Payment",
+    "term_payment_value": "Invoice, net 14 days after delivery",
+    "term_shipping_label": "Shipping",
+    "term_shipping_value": "Free shipping over 500 DKK (DK). International shipping is arranged individually.",
+    "term_leadtime_label": "Lead time",
+    "term_leadtime_value": "Depends on order size and current stock. Most orders ship within a week.",
+    "craft_title": "Your own shapes in small runs",
+    "craft_text": "Everything is cut by hand with traditional tools. That means we can make your own shapes — even in very small runs. Write to us with an idea and we will work it out together.",
+    "craft_img_alt": "Hands cutting a wooden button in the workshop",
+    "spec_note": "Both forms are approx. 40 mm long. The holes are 3 mm in diameter — available with one or two holes, chosen when ordering."
+  },
+  "order": {
+    "title": "Order",
+    "subtitle": "Choose variants, quantity and number of holes. We will get back to you with confirmation.",
+    "addVariant": "Add variant",
+    "selectVariant": "Select variant",
+    "holesLabel": "Holes",
+    "holesOne": "One hole",
+    "holesTwo": "Two holes",
+    "quantityLabel": "Quantity",
+    "removeVariant": "Remove",
+    "emailLabel": "Email",
+    "addressLabel": "Delivery address",
+    "noteLabel": "Note (optional)",
+    "submitButton": "Send order",
+    "emailError": "Please enter a valid email",
+    "addressError": "Delivery address is required",
+    "emptyOrderError": "Add at least one variant with a quantity",
+    "spamError": "Spam detected. Please try again.",
+    "genericError": "Something went wrong. Please try again.",
+    "successTitle": "Thank you for your order",
+    "successMessage": "I have received your order and will get back to you with confirmation shortly.",
+    "mailFallback": "Prefer to write? Send an email to"
+  },
+  "woods": {
+    "ahorn": "Maple",
+    "eg": "Oak",
+    "valnod": "Walnut",
+    "ibenholt": "Ebony"
+  },
+  "finishes": {
+    "linolie": "Linseed oil",
+    "shellak": "Shellac"
+  },
+  "forms": {
+    "romso": "Romsø",
+    "stavre": "Stavre"
   }
 }

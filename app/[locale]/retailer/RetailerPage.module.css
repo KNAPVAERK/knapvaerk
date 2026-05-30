@@ -29,13 +29,19 @@
 
 .pageLabel {
   font-family: var(--font-ui);
-  font-size: var(--text-xs);
+  font-size: var(--text-lg);
   font-weight: 400;
   letter-spacing: var(--tracking-ui);
-  line-height: var(--line-height-ui);
-  color: var(--text-secondary);
+  line-height: var(--line-height-heading);
+  color: var(--text-primary);
   text-transform: uppercase;
-  margin: 0 0 var(--space-xs) 0;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .pageLabel {
+    font-size: var(--text-md);
+  }
 }
 
 .heroSubtitle {
@@ -80,12 +86,18 @@
 
 .sectionTitle {
   font-family: var(--font-display);
-  font-size: var(--text-lg);
+  font-size: var(--text-xl);
   font-weight: 400;
   letter-spacing: var(--tracking-serif);
   line-height: var(--line-height-heading);
   color: var(--text-primary);
   margin: 0 0 var(--space-sm) 0;
+}
+
+@media (max-width: 768px) {
+  .sectionTitle {
+    font-size: var(--text-lg);
+  }
 }
 
 .body {
@@ -114,10 +126,186 @@
   text-underline-offset: 2px;
 }
 
+.mailFallback {
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  text-align: center;
+  margin: var(--space-sm) 0 0 0;
+  line-height: var(--line-height-ui);
+}
+
+/* ── Collection (grid) ── */
+
+.gridSection {
+  padding: var(--space-md) var(--space-sm);
+  max-width: 980px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.holesNote {
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: var(--line-height-ui);
+  color: var(--text-secondary);
+  margin: calc(var(--space-sm) * -0.5) 0 var(--space-md) 0;
+}
+
+.group {
+  margin-bottom: var(--space-lg);
+}
+
+.group:last-of-type {
+  margin-bottom: var(--space-md);
+}
+
+.groupHeader {
+  margin-bottom: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--border-light);
+}
+
+.groupTitle {
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  letter-spacing: var(--tracking-ui);
+  text-transform: uppercase;
+  line-height: var(--line-height-ui);
+  color: var(--text-primary);
+  margin: 0 0 0.4rem 0;
+}
+
+.groupDesc {
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-weight: 400;
+  line-height: var(--line-height-body);
+  color: var(--text-secondary);
+  margin: 0;
+  max-width: 40rem;
+}
+
+.groupGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+}
+
+@media (max-width: 768px) {
+  .groupGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 479px) {
+  .groupGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Product card (1:1) ── */
+
+.card {
+  background: transparent;
+}
+
+.cardImageWrap {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: var(--bg-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+}
+
+.cardPlaceholder {
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-ui);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  opacity: 0.5;
+}
+
+.cardBody {
+  padding: var(--space-xs) 0 0 0;
+}
+
+.cardWood {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: 400;
+  color: var(--text-primary);
+  margin: 0 0 0.15rem 0;
+  line-height: var(--line-height-ui);
+}
+
+.cardFinish {
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: var(--line-height-ui);
+}
+
+/* ── Prices & terms ── */
+
+.termsList {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: var(--space-sm);
+  row-gap: var(--space-xs);
+  margin: 0;
+  padding: 0;
+}
+
+.termItem {
+  display: contents;
+}
+
+.termLabel {
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: var(--tracking-ui);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  line-height: var(--line-height-body);
+}
+
+.termValue {
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-weight: 400;
+  color: var(--text-primary);
+  line-height: var(--line-height-body);
+  margin: 0;
+}
+
 /* ── Desktop ── */
 
 @media (min-width: 969px) {
   .section {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .gridSection {
     padding: var(--space-lg) var(--space-md);
   }
 }
