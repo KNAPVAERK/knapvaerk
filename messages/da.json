@@ -58,6 +58,8 @@
   "retailer": {
     "page_label": "FORHANDLERKATALOG",
     "intro_text": "Hver knap er snittet, formet og færdigbehandlet i hånden på værkstedet på Hindsholm.",
+    "hero_img_alt": "Håndskårne træknapper fra KNAPVÆRK",
+    "hero_placeholder": "Billede kommer",
     "forms_title": "Former",
     "form_romso_name": "Romsø",
     "form_romso_desc": "Romsø-knappen snittes med en let tilspidsning i hver ende.",

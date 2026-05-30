@@ -50,6 +50,10 @@ export default async function RetailerPage({ params }: { params: Promise<{ local
     stavre: t('form_stavre_desc'),
   }
 
+  // Scale/context hero. Set to '' to show the placeholder.
+  // Frame ratio is set in CSS (.heroSection .imageBlock) to match the image.
+  const heroImage = '/assets/images/Retailerknapper.webp'
+
   return (
     <>
       <main className={styles.page} data-page="retailer">
@@ -59,6 +63,19 @@ export default async function RetailerPage({ params }: { params: Promise<{ local
           </a>
           <p className={styles.pageLabel}>{t('page_label')}</p>
         </header>
+
+        {/* Hero — scale/context shot. Swap heroImage for the real photo. */}
+        <section className={styles.heroSection}>
+          <div className={styles.imageBlock}>
+            {heroImage ? (
+              <img src={heroImage} alt={t('hero_img_alt')} className={styles.heroImage} />
+            ) : (
+              <div className={styles.heroPlaceholder}>
+                <span>{t('hero_placeholder')}</span>
+              </div>
+            )}
+          </div>
+        </section>
 
         {/* Intro */}
         <section className={styles.section}>

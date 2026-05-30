@@ -28,7 +28,8 @@
       "Bash(netstat:*)",
       "Bash(git init:*)",
       "Bash(vercel:*)",
-      "Bash(timeout 3 tail:*)"
+      "Bash(timeout 3 tail:*)",
+      "Bash(npx playwright *)"
     ],
     "additionalDirectories": [
       "c:\\Users\\45239\\Desktop\\Knapværk\\sales-tracker\\src\\lib"

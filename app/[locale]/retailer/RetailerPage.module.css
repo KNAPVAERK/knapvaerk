@@ -65,6 +65,45 @@
   box-sizing: border-box;
 }
 
+/* ── Hero (inset frame) ── */
+
+.heroSection {
+  padding: 0 var(--space-sm);
+  max-width: 680px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.heroSection .imageBlock {
+  aspect-ratio: 5 / 3;
+  margin: var(--space-sm) auto var(--space-md);
+}
+
+.heroImage,
+.heroPlaceholder {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  background-color: var(--bg-subtle);
+}
+
+.heroPlaceholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.heroPlaceholder span {
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-ui);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  opacity: 0.5;
+}
+
 /* ── Images ── */
 
 .imageBlock {
