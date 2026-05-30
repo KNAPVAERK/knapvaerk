@@ -79,13 +79,13 @@
     "term_leadtime_label": "Leveringstid",
     "term_leadtime_value": "Afhænger af ordrestørrelse og aktuel lagerbeholdning. De fleste bestillinger afsendes inden for en uge.",
     "craft_title": "Former i små oplag",
-    "craft_text": "Alt snittes i hånden med traditionelt værktøj. Derfor kan jeg formgive knapper efter jeres ønsker — også i meget små oplag. Skriv til os med en idé, så finder vi ud af det sammen.",
+    "craft_text": "Alt snittes i hånden med traditionelt værktøj. Derfor kan jeg formgive knapper efter jeres ønsker — også i meget små oplag. Skriv til mig med en idé, så finder vi ud af det sammen.",
     "craft_img_alt": "Hænder der snitter en træknap i værkstedet",
     "spec_note": "Knapperne er 40 mm lange. Hullerne er 3 mm i diameter — fås med ét eller to huller, vælges ved bestilling."
   },
   "order": {
     "title": "Bestilling",
-    "subtitle": "Vælg varianter, antal og antal huller. Vi vender tilbage med bekræftelse.",
+    "subtitle": "Vælg varianter, antal og antal huller. Jeg vender tilbage med bekræftelse.",
     "addVariant": "Tilføj variant",
     "selectVariant": "Vælg variant",
     "holesLabel": "Huller",
