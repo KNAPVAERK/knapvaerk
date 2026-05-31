@@ -112,7 +112,7 @@
     "genericError": "Something went wrong. Please try again.",
     "successTitle": "Thank you for your order",
     "successMessage": "I have received your order and will get back to you with confirmation shortly.",
-    "mailFallback": "Prefer to write an email? Send a message to"
+    "mailFallback": "Prefer email? Write to"
   },
   "woods": {
     "ahorn": "Maple",

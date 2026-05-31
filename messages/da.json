@@ -112,7 +112,7 @@
     "genericError": "Noget gik galt. Prøv igen.",
     "successTitle": "Tak for din bestilling",
     "successMessage": "Jeg har modtaget din bestilling og vender tilbage med bekræftelse inden længe.",
-    "mailFallback": "Foretrækker du at skrive en email? Send en mail til"
+    "mailFallback": "Foretrækker du mail? Skriv til"
   },
   "woods": {
     "ahorn": "Ahorn",
