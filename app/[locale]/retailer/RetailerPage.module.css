@@ -19,6 +19,7 @@
   position: absolute;
   top: var(--space-sm);
   right: var(--space-sm);
+  z-index: 10;
 }
 
 @media (max-width: 768px) {
@@ -257,7 +258,8 @@
 
 @media (max-width: 479px) {
   .groupGrid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-sm);
   }
 }
 
