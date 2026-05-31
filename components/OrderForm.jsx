@@ -2,11 +2,18 @@
 
 import { useState, useMemo } from 'react'
 import { useTranslations } from 'next-intl'
-import { VARIANTS } from '../lib/variants'
+import { VARIANTS, FORMS, variantsByForm } from '../lib/variants'
 import styles from './OrderForm.module.css'
 
-let lineId = 0
-const nextLineId = () => ++lineId
+// Wholesale pricing — mirrors the terms copy on the retailer page.
+const PRICE_PER_BUTTON = 50 // DKK, excl. VAT (term_price_value)
+const FREE_SHIPPING_THRESHOLD = 1000 // DKK, Denmark only (term_shipping_value)
+
+// The two hole options, in column order.
+const HOLE_COLUMNS = ['one', 'two']
+
+// Quantity-map key for a single variant + hole combination.
+const cellKey = (sku, holes) => `${sku}-${holes}`
 
 export default function OrderForm({ locale }) {
   const t = useTranslations('order')
@@ -14,7 +21,8 @@ export default function OrderForm({ locale }) {
   const tf = useTranslations('finishes')
   const tForm = useTranslations('forms')
 
-  const [lines, setLines] = useState([])
+  // Flat quantity map keyed by `${sku}-${holes}`; empty/0 entries are simply absent.
+  const [quantities, setQuantities] = useState({})
   const [email, setEmail] = useState('')
   const [address, setAddress] = useState('')
   const [note, setNote] = useState('')
@@ -23,38 +31,43 @@ export default function OrderForm({ locale }) {
   const [formVisible, setFormVisible] = useState(true)
   const [touched, setTouched] = useState({ email: false, address: false })
 
-  // Human-readable label for a variant, e.g. "Romsø · Ahorn · Shellak"
-  const variantLabel = (v) =>
+  // Row label — wood · finish. The model (Romsø/Stavre) is shown by the group
+  // heading above, so it's omitted here to avoid repetition.
+  const variantLabel = (v) => `${tw(v.wood)} · ${tf(v.finish)}`
+
+  // Full label including the model, for screen readers (read in isolation).
+  const variantLabelFull = (v) =>
     `${tForm(v.form)} · ${tw(v.wood)} · ${tf(v.finish)}`
 
-  // Options grouped by form for the picker
-  const options = useMemo(
-    () => VARIANTS.map((v) => ({ sku: v.sku, label: variantLabel(v), form: v.form, wood: v.wood, finish: v.finish })),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [locale]
-  )
+  const setCell = (sku, holes, raw) => {
+    const key = cellKey(sku, holes)
+    const value = Math.max(0, parseInt(raw, 10) || 0)
+    setQuantities((prev) => {
+      const next = { ...prev }
+      if (value > 0) next[key] = value
+      else delete next[key]
+      return next
+    })
+  }
+
+  // Live totals derived from the quantity map.
+  const { totalQty, totalPrice, qualifiesFreeShipping, remaining } = useMemo(() => {
+    const qty = Object.values(quantities).reduce((sum, n) => sum + n, 0)
+    const price = qty * PRICE_PER_BUTTON
+    return {
+      totalQty: qty,
+      totalPrice: price,
+      qualifiesFreeShipping: price >= FREE_SHIPPING_THRESHOLD,
+      remaining: Math.max(0, FREE_SHIPPING_THRESHOLD - price),
+    }
+  }, [quantities])
 
   const validateEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
 
   const emailValid = email.length === 0 ? null : validateEmail(email)
   const addressValid = address.length === 0 ? null : address.trim().length > 0
-  const hasValidLine = lines.some((l) => l.sku && l.quantity > 0)
+  const hasValidLine = totalQty > 0
   const isFormValid = emailValid === true && address.trim().length > 0 && hasValidLine
-
-  const addLine = () => {
-    setLines((prev) => [
-      ...prev,
-      { id: nextLineId(), sku: '', holes: 'one', quantity: 1 },
-    ])
-  }
-
-  const updateLine = (id, patch) => {
-    setLines((prev) => prev.map((l) => (l.id === id ? { ...l, ...patch } : l)))
-  }
-
-  const removeLine = (id) => {
-    setLines((prev) => prev.filter((l) => l.id !== id))
-  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -82,26 +95,26 @@ export default function OrderForm({ locale }) {
       return
     }
 
-    const payload = {
-      email,
-      address,
-      note,
-      locale,
-      lines: lines
-        .filter((l) => l.sku && l.quantity > 0)
-        .map((l) => {
-          const v = options.find((o) => o.sku === l.sku)
-          return {
-            sku: l.sku,
-            wood: v?.wood,
-            form: v?.form,
-            finish: v?.finish,
-            holes: l.holes,
-            quantity: l.quantity,
-          }
-        }),
-      _gotcha: '',
+    // Build a minimal payload: only cells with quantity > 0, same line shape the
+    // /api/order route already expects ({ sku, wood, form, finish, holes, quantity }).
+    const lines = []
+    for (const v of VARIANTS) {
+      for (const holes of HOLE_COLUMNS) {
+        const quantity = quantities[cellKey(v.sku, holes)]
+        if (quantity > 0) {
+          lines.push({
+            sku: v.sku,
+            wood: v.wood,
+            form: v.form,
+            finish: v.finish,
+            holes,
+            quantity,
+          })
+        }
+      }
     }
+
+    const payload = { email, address, note, locale, lines, _gotcha: '' }
 
     setLoading(true)
     try {
@@ -123,7 +136,6 @@ export default function OrderForm({ locale }) {
       setStatus({ type: 'error', message: error.message || t('genericError') })
     }
   }
-
 
   if (!formVisible && status.type === 'success') {
     return (
@@ -152,85 +164,80 @@ export default function OrderForm({ locale }) {
           aria-hidden="true"
         />
 
-        {/* Order lines */}
-        <div className={styles.lines}>
-          {lines.map((line) => (
-            <div key={line.id} className={styles.lineRow}>
-              <div className={styles.lineVariant}>
-                <label className={styles.srOnly} htmlFor={`variant-${line.id}`}>
-                  {t('selectVariant')}
-                </label>
-                <select
-                  id={`variant-${line.id}`}
-                  value={line.sku}
-                  onChange={(e) => updateLine(line.id, { sku: e.target.value })}
-                  className={styles.select}
-                  required
-                >
-                  <option value="" disabled>
-                    {t('selectVariant')}
-                  </option>
-                  {options.map((o) => (
-                    <option key={o.sku} value={o.sku}>
-                      {o.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
+        {/* Order matrix — one row per variant, two number inputs (one/two holes) */}
+        <div className={styles.matrix}>
+          <div className={`${styles.matrixRow} ${styles.matrixHead}`} aria-hidden="true">
+            <span className={styles.matrixVariantHead}>{t('matrixVariantCol')}</span>
+            <span className={styles.matrixHoleHead}>{t('matrixOneHole')}</span>
+            <span className={styles.matrixHoleHead}>{t('matrixTwoHoles')}</span>
+          </div>
 
-              <div className={styles.lineHoles}>
-                <label className={styles.srOnly} htmlFor={`holes-${line.id}`}>
-                  {t('holesLabel')}
-                </label>
-                <select
-                  id={`holes-${line.id}`}
-                  value={line.holes}
-                  onChange={(e) => updateLine(line.id, { holes: e.target.value })}
-                  className={styles.select}
-                >
-                  <option value="one">{t('holesOne')}</option>
-                  <option value="two">{t('holesTwo')}</option>
-                </select>
-              </div>
+          {FORMS.map((form) => (
+            <div key={form} className={styles.matrixGroup}>
+              <h3 className={styles.matrixGroupTitle}>{tForm(form)}</h3>
 
-              <div className={styles.lineQty}>
-                <label className={styles.srOnly} htmlFor={`qty-${line.id}`}>
-                  {t('quantityLabel')}
-                </label>
-                <input
-                  id={`qty-${line.id}`}
-                  type="number"
-                  min="1"
-                  step="1"
-                  value={line.quantity}
-                  onChange={(e) =>
-                    updateLine(line.id, {
-                      quantity: Math.max(1, parseInt(e.target.value, 10) || 1),
-                    })
-                  }
-                  className={styles.qtyInput}
-                  aria-label={t('quantityLabel')}
-                />
-              </div>
+              {variantsByForm(form).map((v) => (
+                <div key={v.sku} className={styles.matrixRow}>
+                  <span className={styles.matrixVariant}>{variantLabel(v)}</span>
 
-              <button
-                type="button"
-                className={styles.removeBtn}
-                onClick={() => removeLine(line.id)}
-                aria-label={t('removeVariant')}
-              >
-                ×
-              </button>
+                  {HOLE_COLUMNS.map((holes) => {
+                    const id = `qty-${v.sku}-${holes}`
+                    const holeLabel =
+                      holes === 'one' ? t('matrixOneHole') : t('matrixTwoHoles')
+                    return (
+                      <div key={holes} className={styles.matrixCell}>
+                        <label className={styles.srOnly} htmlFor={id}>
+                          {variantLabelFull(v)} — {holeLabel}
+                        </label>
+                        <input
+                          id={id}
+                          type="number"
+                          min="0"
+                          step="1"
+                          inputMode="numeric"
+                          placeholder="0"
+                          value={quantities[cellKey(v.sku, holes)] ?? ''}
+                          onChange={(e) => setCell(v.sku, holes, e.target.value)}
+                          className={styles.qtyInput}
+                        />
+                      </div>
+                    )
+                  })}
+                </div>
+              ))}
             </div>
           ))}
         </div>
 
-        <button type="button" className={styles.addBtn} onClick={addLine}>
-          + {t('addVariant')}
-        </button>
+        {/* Live summary — total + free-shipping indicator */}
+        <div
+          className={`${styles.summaryBar} ${
+            qualifiesFreeShipping ? styles.summaryQualified : ''
+          }`}
+        >
+          <div className={styles.summaryTotals}>
+            <span className={styles.summaryTotalLabel}>{t('total')}</span>
+            <span className={styles.summaryTotalValue}>
+              {totalPrice.toLocaleString('da-DK')} DKK
+            </span>
+          </div>
+          <p className={styles.summaryShipping} aria-live="polite">
+            {totalQty === 0
+              ? t('priceNote')
+              : qualifiesFreeShipping
+                ? t('shippingQualified')
+                : t('shippingRemaining', {
+                    amount: remaining.toLocaleString('da-DK'),
+                  })}
+          </p>
+        </div>
 
         {/* Contact + delivery */}
-        <div className={`${styles.formField} ${emailValid === false && touched.email ? styles.error : ''} ${emailValid === true ? styles.valid : ''}`}>
+        <div
+          className={`${styles.formField} ${
+            emailValid === false && touched.email ? styles.error : ''
+          } ${emailValid === true ? styles.valid : ''}`}
+        >
           <label htmlFor="order-email">{t('emailLabel')}</label>
           <input
             id="order-email"
@@ -243,7 +250,11 @@ export default function OrderForm({ locale }) {
           />
         </div>
 
-        <div className={`${styles.formField} ${addressValid === false && touched.address ? styles.error : ''}`}>
+        <div
+          className={`${styles.formField} ${
+            addressValid === false && touched.address ? styles.error : ''
+          }`}
+        >
           <label htmlFor="order-address">{t('addressLabel')}</label>
           <textarea
             id="order-address"
@@ -267,7 +278,9 @@ export default function OrderForm({ locale }) {
 
         <button
           type="submit"
-          className={`${styles.submitBtn} ${loading ? styles.isLoading : ''} ${!isFormValid ? styles.disabled : ''}`}
+          className={`${styles.submitBtn} ${loading ? styles.isLoading : ''} ${
+            !isFormValid ? styles.disabled : ''
+          }`}
           disabled={loading || !isFormValid}
           aria-busy={loading}
         >

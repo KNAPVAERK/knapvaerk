@@ -1,6 +1,7 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { routing } from '../../../i18n/routing'
 import Footer from '../../../components/Footer'
+import LanguageSwitcher from '../../../components/LanguageSwitcher'
 import OrderForm from '../../../components/OrderForm'
 import { FORMS, variantsByForm } from '../../../lib/variants'
 import styles from './RetailerPage.module.css'
@@ -58,6 +59,9 @@ export default async function RetailerPage({ params }: { params: Promise<{ local
     <>
       <main className={styles.page} data-page="retailer">
         <header className={styles.header}>
+          <div className={styles.langSwitch}>
+            <LanguageSwitcher />
+          </div>
           <a href={`/${locale === routing.defaultLocale ? '' : locale}`} className={styles.logoLink}>
             <img src="/assets/images/logo1.svg" alt="KNAPVÆRK" className={styles.logo} />
           </a>
