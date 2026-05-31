@@ -23,13 +23,14 @@ export default function OrderForm({ locale }) {
 
   // Flat quantity map keyed by `${sku}-${holes}`; empty/0 entries are simply absent.
   const [quantities, setQuantities] = useState({})
+  const [company, setCompany] = useState('')
   const [email, setEmail] = useState('')
   const [address, setAddress] = useState('')
   const [note, setNote] = useState('')
   const [loading, setLoading] = useState(false)
   const [status, setStatus] = useState({ type: '', message: '' })
   const [formVisible, setFormVisible] = useState(true)
-  const [touched, setTouched] = useState({ email: false, address: false })
+  const [touched, setTouched] = useState({ company: false, email: false, address: false })
 
   // Row label — wood · finish. The model (Romsø/Stavre) is shown by the group
   // heading above, so it's omitted here to avoid repetition.
@@ -64,10 +65,15 @@ export default function OrderForm({ locale }) {
 
   const validateEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
 
+  const companyValid = company.length === 0 ? null : company.trim().length > 0
   const emailValid = email.length === 0 ? null : validateEmail(email)
   const addressValid = address.length === 0 ? null : address.trim().length > 0
   const hasValidLine = totalQty > 0
-  const isFormValid = emailValid === true && address.trim().length > 0 && hasValidLine
+  const isFormValid =
+    company.trim().length > 0 &&
+    emailValid === true &&
+    address.trim().length > 0 &&
+    hasValidLine
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -80,8 +86,12 @@ export default function OrderForm({ locale }) {
       return
     }
 
-    setTouched({ email: true, address: true })
+    setTouched({ company: true, email: true, address: true })
 
+    if (company.trim().length === 0) {
+      setStatus({ type: 'error', message: t('companyError') })
+      return
+    }
     if (emailValid !== true) {
       setStatus({ type: 'error', message: t('emailError') })
       return
@@ -114,7 +124,7 @@ export default function OrderForm({ locale }) {
       }
     }
 
-    const payload = { email, address, note, locale, lines, _gotcha: '' }
+    const payload = { company, email, address, note, locale, lines, _gotcha: '' }
 
     setLoading(true)
     try {
@@ -233,6 +243,23 @@ export default function OrderForm({ locale }) {
         </div>
 
         {/* Contact + delivery */}
+        <div
+          className={`${styles.formField} ${
+            companyValid === false && touched.company ? styles.error : ''
+          } ${companyValid === true ? styles.valid : ''}`}
+        >
+          <label htmlFor="order-company">{t('companyLabel')}</label>
+          <input
+            id="order-company"
+            type="text"
+            value={company}
+            onChange={(e) => setCompany(e.target.value)}
+            onBlur={() => setTouched((p) => ({ ...p, company: true }))}
+            required
+            aria-invalid={companyValid === false && touched.company}
+          />
+        </div>
+
         <div
           className={`${styles.formField} ${
             emailValid === false && touched.email ? styles.error : ''

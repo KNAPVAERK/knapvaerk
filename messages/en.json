@@ -99,6 +99,8 @@
     "priceNote": "Prices excl. VAT · 50 DKK per button",
     "shippingQualified": "Qualified for free shipping!",
     "shippingRemaining": "Remaining for free shipping: {amount} DKK",
+    "companyLabel": "Company/name",
+    "companyError": "Company/name is required",
     "emailLabel": "Email",
     "addressLabel": "Delivery address",
     "noteLabel": "Note (optional)",

@@ -21,6 +21,16 @@ const FORM_LABELS = { romso: 'Romsø', stavre: 'Stavre' }
 const FINISH_LABELS = { linolie: 'Linolie', shellak: 'Shellak' }
 const HOLES_LABELS = { one: 'Ét hul', two: 'To huller' }
 
+// Escape user-provided text before interpolating into the HTML email.
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+}
+
 function describeLine(line) {
   const form = FORM_LABELS[line.form] || line.form || ''
   const wood = WOOD_LABELS[line.wood] || line.wood || ''
@@ -32,7 +42,7 @@ function describeLine(line) {
 export async function POST(request) {
   try {
     const body = await request.json()
-    const { email, address, note = '', locale = 'da', lines = [], _gotcha } = body
+    const { company = '', email, address, note = '', locale = 'da', lines = [], _gotcha } = body
 
     const t = errorMessages[locale] || errorMessages.da
 
@@ -46,7 +56,7 @@ export async function POST(request) {
       ? lines.filter((l) => l && l.sku && Number(l.quantity) > 0)
       : []
 
-    if (!email || !address || validLines.length === 0) {
+    if (!company || !company.trim() || !email || !address || validLines.length === 0) {
       return NextResponse.json({ error: t.missingFields }, { status: 400 })
     }
 
@@ -65,6 +75,7 @@ export async function POST(request) {
     const text = `
 Ny bestilling
 
+Virksomhed/navn: ${company}
 Fra: ${email}
 
 Varianter:
@@ -93,7 +104,8 @@ ${note ? `\nNote:\n${note}` : ''}
           Ny bestilling
         </h2>
 
-        <p style="margin: 5px 0;"><strong>Fra:</strong> ${email}</p>
+        <p style="margin: 5px 0;"><strong>Virksomhed/navn:</strong> ${escapeHtml(company)}</p>
+        <p style="margin: 5px 0;"><strong>Fra:</strong> ${escapeHtml(email)}</p>
 
         <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
           <thead>
@@ -127,7 +139,7 @@ ${note ? `\nNote:\n${note}` : ''}
       from: 'KNAPVÆRK Bestilling <kontakt@knapvaerk.com>',
       to: ['bjerre@knapvaerk.com'],
       replyTo: email,
-      subject: `Bestilling — ${email}`,
+      subject: `Bestilling — ${company}`,
       text,
       html,
     })

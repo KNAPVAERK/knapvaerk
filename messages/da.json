@@ -99,6 +99,8 @@
     "priceNote": "Priser ekskl. moms · 50 DKK pr. knap",
     "shippingQualified": "Kvalificeret til fri fragt!",
     "shippingRemaining": "Mangler til fri fragt: {amount} DKK",
+    "companyLabel": "Virksomhed/navn",
+    "companyError": "Virksomhed/navn skal udfyldes",
     "emailLabel": "Email",
     "addressLabel": "Leveringsadresse",
     "noteLabel": "Note (valgfri)",
